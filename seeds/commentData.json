@@ -1,0 +1,12 @@
+[
+   {
+    "comment_text": "This is test text",
+    "user_id": 2,
+    "post_id": 1
+   },
+   {
+    "comment_text": "this is more text",
+    "user_id": 3,
+    "post_id": 2
+   }
+]

@@ -2,35 +2,35 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Registry</title>
-  <link rel="stylesheet" href="/css/jass.css">
+  <title>Blog</title>
+  <link rel="stylesheet" type="text/css" href="/css/jass.css">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 
 <body>
-  <header class="display-flex justify-space-between align-center p-2">
-    <h1>
-      User Registry
-    </h1>
-    <!-- TODO: Add a comment describing the functionality of this helper -->
-    {{!-- This makes sure that if the user is logged in, they are given a logout button to click --}}
-    {{#if logged_in}}
-    <nav>
-      <button class="btn" id="logout">logout</button>
-    </nav>
-    {{/if}}
+  <header>
+    <h1>Welcome to My Tech Blog</h1>
   </header>
-  <main class="container container-fluid mt-5">
-    {{{ body }}}
+  <nav>
+    <a href ="/dash">Dashboard</a>
+    <a href="/">Home</a>
+    {{#if loggedIn}}
+    <button id="logout" class="btn-no-style">Logout</button>
+    {{else}}
+    <a href="/login">Login</a>
+    {{/if}}
+  </nav>
+  <main>
+    <aside>
+      <h2>Enjoy the Posts!</h2>
+    </aside>
+    <div class="post">
+      {{{body}}}
+    </div>
   </main>
-  <footer>
-      
-  </footer>
-
-  <!-- TODO: Add a comment describing the functionality of this helper -->
-  {{!-- This makes sure that if the user is logged in, then they have the option to run the logout button --}}
-  {{#if logged_in}}
+  {{#if loggedIn}}
   <script src="/js/logout.js"></script>
   {{/if}}
 </body>

@@ -4,7 +4,7 @@ const withAuth = require('../utils/auth');
 
 // TODO: Add a comment describing the functionality of the withAuth middleware
 //the withAuth middleware ensures that the router sends the user to this page, only if the user is logged in
-router.get('/', async (req, res) => {
+router.get('/dash', async (req, res) => {
   try {
     const userData = await User.findAll({
       attributes: { exclude: ['password'] },
@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
 
     const users = userData.map((project) => project.get({ plain: true }));
 
-    res.render('homepage', {
+    res.render('Dashboard', {
       // users,
       // // TODO: Add a comment describing the functionality of this property
       // //this requires the user be logged in to access this screen
