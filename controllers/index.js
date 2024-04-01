@@ -6,7 +6,7 @@ const dashBoardRoutes = require('./dashBoardRoutes');
 
 router.use('/', homeRoutes);
 router.use('/api', apiRoutes);
-router.use('/dashboard', dashBoardRoutes);
+router.use('/dash', dashBoardRoutes);
 
 module.exports = router;
 

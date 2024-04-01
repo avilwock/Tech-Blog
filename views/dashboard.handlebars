@@ -1,17 +1,17 @@
-
+<!-- dashboard.hbs -->
 <h2>Your Posts</h2>
 
-<button type="submit" class="btn new-post-button"><a class="link" href="/dashboard/new">+ New Post</a></button>
-<section>
-{{#if posts.length}}
-
-  
-    {{#each posts as |post|}}
-      {{> dashboard-postinfo post}}
+{{#if post.length}}
+  <ul>
+    {{#each post}}
+      <li>
+        <h3>{{post.title}}</h3>
+        <p>{{post.text}}</p>
+        <p>Created at: {{format_date post.created_at}}</p>
+        <p>Created by: {{post.user.name}}</p>
+      </li>
     {{/each}}
-
-
+  </ul>
+{{else}}
+  <p>No posts available.</p>
 {{/if}}
-</section>
-
-{{!-- <script src="/js/add-post.js"></script> --}}

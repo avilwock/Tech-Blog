@@ -14,13 +14,13 @@ router.get('/', async (req, res) => {
     const users = userData.map((project) => project.get({ plain: true }));
 
     res.render('homepage', {
-      // users,
-      // // TODO: Add a comment describing the functionality of this property
-      // //this requires the user be logged in to access this screen
-      // //we pass this is to the homepage template, but doesn't mean it's necessarily used here. It shows on main.handlebars in this program
-      // //creates a condtiional statement, if logged in, shows the logged out button
-      // //cannot access homepage if you're not logged in, because no point in having it if you're on homepage because you can't show the homepage if you aren't logged in.
-      // logged_in: req.session.logged_in,
+      users,
+      // TODO: Add a comment describing the functionality of this property
+      //this requires the user be logged in to access this screen
+      //we pass this is to the homepage template, but doesn't mean it's necessarily used here. It shows on main.handlebars in this program
+      //creates a condtiional statement, if logged in, shows the logged out button
+      //cannot access homepage if you're not logged in, because no point in having it if you're on homepage because you can't show the homepage if you aren't logged in.
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -28,12 +28,12 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-  // // TODO: Add a comment describing the functionality of this if statement
-  // //this redirects the person to the homepage if they have logged in
-  // if (req.session.logged_in) {
-  //   res.redirect('/');
-  //   return;
-  // }
+  // TODO: Add a comment describing the functionality of this if statement
+  //this redirects the person to the homepage if they have logged in
+  if (req.session.logged_in) {
+    res.redirect('/');
+    return;
+  }
 
   res.render('login');
 });

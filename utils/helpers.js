@@ -1,15 +1,16 @@
 module.exports = {
-  get_emoji: () => {
-    const randomNum = Math.random();
-    let book = "📗";
-
-    if (randomNum > 0.7) {
-      book = "📘";
-    } else if (randomNum > 0.4) {
-      book = "📙";
-    }
-
-    return `<span for="img" aria-label="book">${book}</span>`;
+  format_time: (date) => {
+    return date.toLocaleTimeString();
   },
+  format_date: (date) => {
+    if (!date || isNaN(new Date(date))) {
+      return 'Invalid Date';
+    }
+    const formattedDate = new Date(date).toLocaleDateString('en-US', {
+      month: '2-digit',
+      day: '2-digit',
+      year: 'numeric'
+    });
+    return formattedDate;
+  }
 };
-//change to format_date

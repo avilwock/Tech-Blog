@@ -1,38 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog</title>
-  <link rel="stylesheet" type="text/css" href="/css/jass.css">
-  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <title>Tech Blog</title>
+  
+  <link rel="stylesheet" href="/css/jass.css">
+
 </head>
 
 <body>
-  <header>
-    <h1>Welcome to My Tech Blog</h1>
-  </header>
-  <nav>
-    <a href ="/dash">Dashboard</a>
-    <a href="/">Home</a>
+  <div class="container wrapper">
+<header class="row">
+  <h1><a class="logo" href="/">Tech Blog</a></h1>
+      <nav>
+        <ul class="navbar">
+              <li><a class="link" href="/">Home</a></li>
+               <li><a class="link" href="/dash">Dashboard</a></li>
+              {{#if loggedIn}}
+               <li><a class="link" href="/" id="logout">Logout</a></li>
+              {{else}}
+               <li><a class="link" href="/login">Login</a></li>
+              {{/if}}
+        </ul>
+      </nav>
+
+    
+</header>
+
+<main>
+  {{{ body }}}
+</main>
+
     {{#if loggedIn}}
-    <button id="logout" class="btn-no-style">Logout</button>
-    {{else}}
-    <a href="/login">Login</a>
+    
+    <script src="/js/logout.js"></script>
     {{/if}}
-  </nav>
-  <main>
-    <aside>
-      <h2>Enjoy the Posts!</h2>
-    </aside>
-    <div class="post">
-      {{{body}}}
-    </div>
-  </main>
-  {{#if loggedIn}}
-  <script src="/js/logout.js"></script>
-  {{/if}}
+</div>
 </body>
 
 </html>

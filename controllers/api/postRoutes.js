@@ -4,13 +4,8 @@ const sequelize = require('../../config/connection');
 const withAuth = require('../../utils/auth');
 
 router.get('/', (req, res) => {
-    console.log('======================');
     Post.findAll({
-            attributes: ['id',
-                'title',
-                'text',
-                'created_at'
-            ],
+            attributes: ['id', 'title', 'text', 'created_at'],
             order: [
                 ['created_at', 'DESC']
             ],
@@ -28,7 +23,10 @@ router.get('/', (req, res) => {
                 }
             ]
         })
-        .then(dbPostData => res.json(dbPostData.reverse()))
+        .then(dbPostData => {
+            const post = dbPostData.map(post => post.get({ plain: true }));
+            res.render('homepage', { post });
+        })
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
@@ -72,7 +70,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
-router.post('/', withAuth, (req, res) => {
+router.post('/', (req, res) => {
     Post.create({
             title: req.body.title,
             content: req.body.text,
@@ -85,7 +83,7 @@ router.post('/', withAuth, (req, res) => {
         });
 });
 
-router.put('/:id', withAuth, (req, res) => {
+router.put('/:id', (req, res) => {
     Post.update({
             title: req.body.title,
             content: req.body.text
@@ -105,7 +103,7 @@ router.put('/:id', withAuth, (req, res) => {
             res.status(500).json(err);
         });
 });
-router.delete('/:id', withAuth, (req, res) => {
+router.delete('/:id', (req, res) => {
     Post.destroy({
         where: {
             id: req.params.id

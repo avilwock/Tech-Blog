@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
+
+
 router.get('/', (req, res) => {
     User.findAll({
             attributes: { exclude: ['[password'] }
@@ -22,7 +24,7 @@ router.get('/:id', (req, res) => {
                     attributes: [
                         'id',
                         'title',
-                        'content',
+                        'text',
                         'created_at'
                     ]
                 },
@@ -81,7 +83,7 @@ router.post('/', (req, res) => {
 router.post('/login', (req, res) => {
     User.findOne({
             where: {
-                username: req.body.username
+                name: req.body.name
             }
         }).then(dbUserData => {
             if (!dbUserData) {
@@ -97,7 +99,7 @@ router.post('/login', (req, res) => {
             req.session.save(() => {
 
                 req.session.user_id = dbUserData.id;
-                req.session.username = dbUserData.username;
+                req.session.name = dbUserData.name;
                 req.session.loggedIn = true;
 
                 res.json({ user: dbUserData, message: 'You are now logged in!' });
