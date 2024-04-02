@@ -1,20 +1,27 @@
 const express = require('express');
 const router = express.Router();
-const { Post } = require('../models/');
+const { Post, User } = require('../models/');
+const withAuth = require('../utils/auth');
+
 
 router.get('/', async (req, res) => {
   try {
-    // Fetch posts data
-    const post = await Post.findAll({
-      // Add any necessary options for fetching posts
+    // Fetch all posts data
+    const posts = await Post.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['name'] // Include the user's name in the result
+        }
+      ]
     });
-    console.log(post);
 
-    res.render('dashboard', { post }); // Pass posts to the template
+    res.render('dashboard', { posts });
   } catch (error) {
     console.error('Error fetching posts:', error);
     res.status(500).json('Internal server error');
   }
 });
+
 
 module.exports = router;

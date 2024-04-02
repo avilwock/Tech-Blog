@@ -1,14 +1,13 @@
 <!-- dashboard.hbs -->
 <h2>Your Posts</h2>
 
-{{#if post.length}}
+{{#if posts.length}}
   <ul>
-    {{#each post}}
+    {{#each posts}}
       <li>
-        <h3>{{post.title}}</h3>
-        <p>{{post.text}}</p>
-        <p>Created at: {{format_date post.created_at}}</p>
-        <p>Created by: {{post.user.name}}</p>
+        <h3>{{this.dataValues.title}}</h3> <!-- Access the title property using dataValues -->
+        <p>{{this.dataValues.text}}</p> <!-- Access the text property using dataValues -->
+        <p>Posted by <span class="post-username">{{this.user.dataValues.name}}</span> on {{format_date this.dataValues.created_at}}</p> <!-- Access user's name using dataValues -->
       </li>
     {{/each}}
   </ul>

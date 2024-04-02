@@ -1,7 +1,16 @@
-{{#each posts as |post| }}
-<article class="post">
-    {{> post-info post}}
-</article>
-{{/each}}
+<!-- dashboard.hbs -->
+<h2>Your Posts</h2>
 
-<script src ="/utils/helpers.js"></script>
+{{#if posts.length}}
+  <ul>
+    {{#each posts}}
+      <li>
+        <h3>{{this.dataValues.title}}</h3> <!-- Access the title property using dataValues -->
+        <p>{{this.dataValues.text}}</p> <!-- Access the text property using dataValues -->
+        <p>Posted by <span class="post-username">{{this.user.dataValues.name}}</span> on {{format_date this.dataValues.created_at}}</p> <!-- Access user's name using dataValues -->
+      </li>
+    {{/each}}
+  </ul>
+{{else}}
+  <p>No posts available.</p>
+{{/if}}

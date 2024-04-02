@@ -6,13 +6,9 @@ const withAuth = require('../../utils/auth');
 router.get('/', (req, res) => {
     Post.findAll({
             attributes: ['id', 'title', 'text', 'created_at'],
-            order: [
-                ['created_at', 'DESC']
-            ],
-            include: [{
-                    model: User,
-                    attributes: ['name']
-                },
+            order: [['created_at', 'DESC']],
+            include: [
+                {model: User, attributes: ['name']},
                 {
                     model: Comment,
                     attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
@@ -24,8 +20,7 @@ router.get('/', (req, res) => {
             ]
         })
         .then(dbPostData => {
-            const post = dbPostData.map(post => post.get({ plain: true }));
-            res.render('homepage', { post });
+            res.json(dbPostData);
         })
         .catch(err => {
             console.log(err);
