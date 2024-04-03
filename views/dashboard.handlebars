@@ -1,10 +1,3 @@
-{{#if logged_in}}
-
-  <form action="/api/users/logout" method="POST"> <!-- Assuming this is the logout route -->
-    <button type="submit" class="btn">Logout</button>
-  </form>
-{{/if}}
-
 <h2>Your Posts</h2>
 
 {{#if posts.length}}
@@ -14,10 +7,28 @@
         <h3>{{this.dataValues.title}}</h3>
         <p>{{this.dataValues.text}}</p>
         <p>Posted by <span class="post-username">{{this.user.dataValues.name}}</span> on {{format_date this.dataValues.created_at}}</p>
-        <button class="btn edit-post-btn" data-id="{{this.dataValues.id}}">Edit</button>
+        <div class="comments">
+          {{#each this.comments}}
+            <div class="card post comment-box">
+              <div class="card-body post-body">
+                <div class="card-text comment-text">
+                    {{this.comment_text}}
+                </div>
+                <div class="comment-author">
+                    -{{this.user.name}}, {{format_date this.created_at}}
+                </div>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+
+        <a href="/dash/edit/{{this.dataValues.id}}" class ="btn edit-post-btn">Edit Post</a>
       </li>
     {{/each}}
   </ul>
 {{else}}
   <p>No posts available.</p>
 {{/if}}
+
+<button type="button" class="btn"><a class="text-light" href="/dash/new">Add New Post</a></button>
+
