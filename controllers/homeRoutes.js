@@ -32,5 +32,10 @@ router.get('/login', (req, res) => {
     res.render('login', { title: 'Login Page' }); // Assuming your view file is named login.handlebars
   });
 
+  //GET signup route direct user to signup page
+router.get("/signup", (req, res) => {
+  res.render("signup");
+});
+
 
 module.exports = router;

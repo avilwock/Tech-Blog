@@ -21,7 +21,7 @@ Post.init(
       allowNull: false,
     },
     created_at: {
-      type: DataTypes.STRING,
+      type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW
     },

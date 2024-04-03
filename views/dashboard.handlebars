@@ -1,13 +1,20 @@
-<!-- dashboard.hbs -->
+{{#if logged_in}}
+
+  <form action="/api/users/logout" method="POST"> <!-- Assuming this is the logout route -->
+    <button type="submit" class="btn">Logout</button>
+  </form>
+{{/if}}
+
 <h2>Your Posts</h2>
 
 {{#if posts.length}}
   <ul>
     {{#each posts}}
       <li>
-        <h3>{{this.dataValues.title}}</h3> <!-- Access the title property using dataValues -->
-        <p>{{this.dataValues.text}}</p> <!-- Access the text property using dataValues -->
-        <p>Posted by <span class="post-username">{{this.user.dataValues.name}}</span> on {{format_date this.dataValues.created_at}}</p> <!-- Access user's name using dataValues -->
+        <h3>{{this.dataValues.title}}</h3>
+        <p>{{this.dataValues.text}}</p>
+        <p>Posted by <span class="post-username">{{this.user.dataValues.name}}</span> on {{format_date this.dataValues.created_at}}</p>
+        <button class="btn edit-post-btn" data-id="{{this.dataValues.id}}">Edit</button>
       </li>
     {{/each}}
   </ul>

@@ -69,7 +69,7 @@ router.post('/', (req, res) => {
             req.session.save(() => {
                 req.session.user_id = dbUserData.id;
                 req.session.name = dbUserData.name;
-                req.session.loggedIn = true;
+                req.session.logged_in = true;
 
                 res.json(dbUserData);
             });
@@ -83,7 +83,7 @@ router.post('/', (req, res) => {
 router.post('/login', (req, res) => {
     User.findOne({
             where: {
-                name: req.body.name
+                email: req.body.email
             }
         }).then(dbUserData => {
             if (!dbUserData) {
@@ -100,9 +100,10 @@ router.post('/login', (req, res) => {
 
                 req.session.user_id = dbUserData.id;
                 req.session.name = dbUserData.name;
-                req.session.loggedIn = true;
+                req.session.logged_in = true;
 
-                res.json({ user: dbUserData, message: 'You are now logged in!' });
+                //res.json({ user: dbUserData, message: 'You are now logged in!' });
+                res.redirect('/dash')
             });
         })
         .catch(err => {
@@ -112,9 +113,9 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/logout', (req, res) => {
-    if (req.session.loggedIn) {
+    if (req.session.logged_in) {
         req.session.destroy(() => {
-            res.status(204).end();
+            res.redirect('/');
         });
     } else {
         res.status(404).end();

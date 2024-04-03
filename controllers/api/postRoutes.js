@@ -68,7 +68,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     Post.create({
             title: req.body.title,
-            content: req.body.text,
+            text: req.body.text,
             user_id: req.session.user_id
         })
         .then(dbPostData => res.json(dbPostData))
@@ -81,7 +81,7 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
     Post.update({
             title: req.body.title,
-            content: req.body.text
+            text: req.body.text
         }, {
             where: {
                 id: req.params.id
@@ -114,5 +114,23 @@ router.delete('/:id', (req, res) => {
         res.status(500).json(err);
     });
 });
+
+router.post('/', async (req, res) => {
+    try {
+      const { title, text } = req.body;
+      const userId = req.session.userId;
+  
+      const newPost = await Post.create({
+        title,
+        text, // Ensure that you're providing a value for the text attribute
+        user_id: userId
+      });
+  
+      res.redirect('/dash');
+    } catch (error) {
+      console.error('Error creating post:', error);
+      res.status(500).json('Internal server error');
+    }
+  });
 
 module.exports = router;

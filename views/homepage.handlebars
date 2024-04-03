@@ -1,5 +1,5 @@
-<!-- dashboard.hbs -->
-<h2>Your Posts</h2>
+<!-- homepage.hbs -->
+<h2>Posts</h2>
 
 {{#if posts.length}}
   <ul>
@@ -14,3 +14,9 @@
 {{else}}
   <p>No posts available.</p>
 {{/if}}
+
+{{#if loggedIn}} <!-- Add a conditional check for loggedIn -->
+  <form action="/api/users/logout" method="POST"> <!-- Assuming this is the logout route -->
+    <button type="submit" class="btn">Logout</button>
+  </form>
+  {{/if}}
