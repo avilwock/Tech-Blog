@@ -4,25 +4,33 @@
   <ul>
     {{#each posts}}
       <li>
-        <h3>{{this.dataValues.title}}</h3>
-        <p>{{this.dataValues.text}}</p>
-        <p>Posted by <span class="post-username">{{this.user.dataValues.name}}</span> on {{format_date this.dataValues.created_at}}</p>
-        <div class="comments">
-          {{#each this.comments}}
-            <div class="card post comment-box">
-              <div class="card-body post-body">
-                <div class="card-text comment-text">
-                    {{this.comment_text}}
-                </div>
-                <div class="comment-author">
-                    -{{this.user.name}}, {{format_date this.created_at}}
-                </div>
-              </div>
-            </div>
-          {{/each}}
+        <div class="post-details">
+          <h3>{{this.dataValues.title}}</h3>
+          <p>{{this.dataValues.text}}</p>
+          <p>Posted by <span class="post-username">{{this.user.dataValues.name}}</span> on {{format_date this.dataValues.created_at}}</p>
         </div>
 
-        <a href="/dash/edit/{{this.dataValues.id}}" class ="btn edit-post-btn">Edit Post</a>
+        <h4>Comments:</h4>
+        {{#if this.comments.length}}
+          <ul>
+            {{#each this.comments}}
+              <li>
+                <div class="comment-details">
+                  <p>{{this.dataValues.comment_text}}</p>
+                  <p>Comment by {{../user.dataValues.name}} on {{format_date this.dataValues.created_at}}</p>
+                </div>
+              </li>
+            {{/each}}
+          </ul>
+        {{else}}
+          <p>No comments available.</p>
+        {{/if}}
+
+
+<a href="/api/posts/{{this.dataValues.id}}" class="btn view-post-btn" data-post-id="{{this.dataValues.id}}">View Post</a>
+
+        <!-- Add button to edit post -->
+        <a href="/dash/edit/{{this.dataValues.id}}" class="btn edit-post-btn">Edit Post</a>
       </li>
     {{/each}}
   </ul>
@@ -32,3 +40,5 @@
 
 <button type="button" class="btn"><a class="text-light" href="/dash/new">Add New Post</a></button>
 
+{{!-- Include client-side JavaScript to handle comment submission --}}
+<script src="/js/comment.js"></script>

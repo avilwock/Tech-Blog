@@ -54,29 +54,36 @@ router.get('/:id', (req, res) => {
         })
         .then(dbPostData => {
             if (!dbPostData) {
-                res.status(404).json({ message: 'No post found with this id' });
-                return;
+                return res.status(404).json({ message: 'No post found with this id' });
             }
-            res.json(dbPostData);
+            // Render the single-post template and pass the post data to it
+            res.render('single-post', { post: dbPostData });
         })
         .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
+            console.error('Error fetching post:', err);
+            res.status(500).json({ message: 'Internal server error' });
         });
 });
 
-router.post('/', (req, res) => {
-    Post.create({
-            title: req.body.title,
-            text: req.body.text,
-            user_id: req.session.user_id
-        })
-        .then(dbPostData => res.json(dbPostData))
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
-});
+
+// router.put('/:id', withAuth, (req, res) => {
+//     Comment.update({
+//         comment_text: req.body.comment_text
+//     }, {
+//         where: {
+//             id: req.params.id
+//         }
+//     }).then(dbCommentData => {
+//         if (!dbCommentData) {
+//             res.status(404).json({ message: 'No comment found with this id' });
+//             return;
+//         }
+//         res.json(dbCommentData);
+//     }).catch(err => {
+//         console.log(err);
+//         res.status(500).json(err);
+//     });
+// });
 
 router.put('/:id', (req, res) => {
     Post.update({
@@ -118,12 +125,12 @@ router.delete('/:id', (req, res) => {
 router.post('/', async (req, res) => {
     try {
       const { title, text } = req.body;
-      const userId = req.session.userId;
+      const user_id = req.session.user_id;
   
       const newPost = await Post.create({
         title,
         text, // Ensure that you're providing a value for the text attribute
-        user_id: userId
+        user_id: user_id
       });
   
       res.redirect('/dash');
@@ -132,5 +139,22 @@ router.post('/', async (req, res) => {
       res.status(500).json('Internal server error');
     }
   });
+
+  router.post('/:post_id', async (req, res) => {
+    try {
+      const post_id = req.params.post_id;
+      const { comment_text } = req.body;
+  
+      const newComment = await Comment.create({
+        post_id: post_id,
+        comment_text: comment_text,
+      });
+  
+      res.status(201).json(newComment);
+    } catch (error) {
+      console.error('Error creating comment:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+});
 
 module.exports = router;

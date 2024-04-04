@@ -5,9 +5,26 @@
   <ul>
     {{#each posts}}
       <li>
-        <h3>{{this.dataValues.title}}</h3> <!-- Access the title property using dataValues -->
-        <p>{{this.dataValues.text}}</p> <!-- Access the text property using dataValues -->
-        <p>Posted by <span class="post-username">{{this.user.dataValues.name}}</span> on {{format_date this.dataValues.created_at}}</p> <!-- Access user's name using dataValues -->
+        <h3>{{this.dataValues.title}}</h3>
+        <p>{{this.dataValues.text}}</p>
+        <p>Posted by <span class="post-username">{{this.user.dataValues.name}}</span> on {{format_date this.dataValues.created_at}}</p>
+      
+        <h4>Comments:</h4>
+        {{#if this.comments.length}}
+          <ul>
+            {{#each this.comments}}
+              <li>
+                <div class="comment-details">
+                  <p>{{this.dataValues.comment_text}}</p>
+                  <p>Comment by {{../user.dataValues.name}} on {{format_date this.dataValues.created_at}}</p>
+                </div>
+              </li>
+            {{/each}}
+          </ul>
+        {{else}}
+          <p>No comments available.</p>
+        {{/if}}        
+
       </li>
     {{/each}}
   </ul>
@@ -15,8 +32,11 @@
   <p>No posts available.</p>
 {{/if}}
 
-{{#if loggedIn}} <!-- Add a conditional check for loggedIn -->
-  <form action="/api/users/logout" method="POST"> <!-- Assuming this is the logout route -->
+{{#if loggedIn}}
+  <form action="/api/users/logout" method="POST">
     <button type="submit" class="btn">Logout</button>
   </form>
-  {{/if}}
+{{/if}}
+  
+
+  
