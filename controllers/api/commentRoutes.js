@@ -1,81 +1,86 @@
-const router = require('express').Router();
-const { Comment } = require('../../models');
-const withAuth = require('../../utils/auth');
+// Importing necessary modules and utilities
+const router = require('express').Router(); // Express router for defining routes
+const { Comment } = require('../../models'); // Importing Comment model from models directory
+const withAuth = require('../../utils/auth'); // Middleware for authentication
 
-
+// Route to get all comments
 router.get('/', (req, res) => {
-    Comment.findAll({})
-        .then(dbCommentData => res.json(dbCommentData))
+    Comment.findAll({}) // Finding all comments in the database
+        .then(dbCommentData => res.json(dbCommentData)) // Sending the retrieved comments as JSON response
         .catch(err => {
             console.log(err);
-            res.status(500).json(err);
+            res.status(500).json(err); // Handling errors
         })
 });
 
+// Route to get a single comment by ID
 router.get('/:id', (req, res) => {
     Comment.findAll({
             where: {
-                id: req.params.id
+                id: req.params.id // Finding comment by its ID
             }
         })
-        .then(dbCommentData => res.json(dbCommentData))
+        .then(dbCommentData => res.json(dbCommentData)) // Sending the retrieved comment as JSON response
         .catch(err => {
             console.log(err);
-            res.status(500).json(err);
+            res.status(500).json(err); // Handling errors
         })
 });
 
+// Route to create a new comment
 router.post('/', withAuth, (req, res) => {
-    console.log('received comment data:', req.body);
-    if (req.session) {
+    console.log('received comment data:', req.body); // Logging received comment data
+    if (req.session) { // Checking if user session exists
         Comment.create({
-                comment_text: req.body.comment_text,
-                post_id: req.body.post_id,
-                user_id: req.session.user_id,
+                comment_text: req.body.comment_text, // Extracting comment text from request body
+                post_id: req.body.post_id, // Extracting post ID from request body
+                user_id: req.session.user_id, // Extracting user ID from session
             })
-            .then(dbCommentData => res.json(dbCommentData))
+            .then(dbCommentData => res.json(dbCommentData)) // Sending the created comment as JSON response
             .catch(err => {
                 console.log(err);
-                res.status(400).json(err);
+                res.status(400).json(err); // Handling errors
             })
     }
 });
 
+// Route to create a new comment asynchronously
 router.post('/:id', withAuth, async (req, res) => {
     try {
-        const { id } = req.params; // Extract post id from URL
-        const { comment_text } = req.body;
-        const user_id = req.session.user_id;
+        const { id } = req.params; // Extracting post id from URL
+        const { comment_text } = req.body; // Extracting comment text from request body
+        const user_id = req.session.user_id; // Extracting user id from session
 
+        // Creating a new comment
         const newComment = await Comment.create({
             comment_text,
-            post_id: id, // Assign post id to the comment
+            post_id: id, // Assigning post id to the comment
             user_id
         });
 
-        res.status(201).json(newComment);
+        res.status(201).json(newComment); // Sending the created comment as JSON response with 201 status (created)
     } catch (error) {
         console.error('Error creating comment:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({ message: 'Internal server error' }); // Handling errors
     }
 });
 
-
-
+// Route to delete a comment by ID
 router.delete('/:id', withAuth, (req, res) => {
     Comment.destroy({
         where: {
-            id: req.params.id
+            id: req.params.id // Finding comment by its ID for deletion
         }
     }).then(dbCommentData => {
-        if (!dbCommentData) {
-            res.status(404).json({ message: 'No comment found with this id' });
+        if (!dbCommentData) { // If no comment is found with the specified ID
+            res.status(404).json({ message: 'No comment found with this id' }); // Sending 404 status with error message
             return;
         }
-        res.json(dbCommentData);
+        res.json(dbCommentData); // Sending deleted comment data as JSON response
     }).catch(err => {
         console.log(err);
-        res.status(500).json(err);
+        res.status(500).json(err); // Handling errors
     });
 });
-module.exports = router;
+
+module.exports = router; // Exporting the router for use in other parts of the application

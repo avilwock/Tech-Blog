@@ -1,32 +1,34 @@
- <div class="post-details">
-        <h1>{{post.dataValues.title}}</h1>
-        <p>{{post.dataValues.text}}</p>
-        <p>Posted by {{post.user.dataValues.name}} on {{format_date post.dataValues.created_at}}</p>
+<div class="post-details">
+    <div class="post">
+    <h1>{{post.dataValues.title}}</h1>
+    <p>{{post.dataValues.text}}</p>
+    <p>Posted by {{post.user.dataValues.name}} on {{format_date post.dataValues.created_at}}</p>
     </div>
+</div>
 
-    <h2>Comments:</h2>
-    {{#if post.comments.length}}
-    <ul>
-        {{#each post.comments}}
-        <li>
-            <div class="comment-details">
-                <p>{{this.dataValues.comment_text}}</p>
-                <p>Comment by {{this.user.dataValues.name}} on {{format_date this.dataValues.created_at}}</p>
-            </div>
-        </li>
-        {{/each}}
-    </ul>
-    {{else}}
-    <p>No comments available.</p>
-    {{/if}}
+<h2>Comments:</h2>
+{{#if post.comments.length}}
+<ul>
+    {{#each post.comments}}
+    <li>
+        <div class="comment-details">
+            <p>{{this.dataValues.comment_text}}</p>
+            <p>Comment by {{this.user.dataValues.name}} on {{format_date this.dataValues.created_at}}</p>
+        </div>
+    </li>
+    {{/each}}
+</ul>
+{{else}}
+<p>No comments available.</p>
+{{/if}}
 
-    <!-- Add Comment Form -->
-  <form id="comment-form" class="comment-form" onsubmit="commentFormHandler(event)">
+<!-- Add Comment Form -->
+<form id="comment-form" class="comment-form" onsubmit="commentFormHandler(event)">
     <input type="text" name="comment-text" placeholder="Enter your comment">
     <button type="submit" class="btn add-comment">Add Comment</button>
-    </form>
+</form>
 
-    <a href="/dash/edit/{{post.id}}" class="btn edit-post-btn">Edit Post</a>
+<a href="/dash/edit/{{post.dataValues.id}}" class="btn edit-post-btn">Edit Post</a>
 
-    <!-- Include client-side JavaScript to handle comment submission -->
-    <script src="/js/comment.js"></script>
+<!-- Include client-side JavaScript to handle comment submission -->
+<script src="/js/comment.js"></script>

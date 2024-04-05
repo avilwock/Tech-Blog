@@ -1,13 +1,13 @@
 [
     {
-      "title": "new Post",
-      "text": "This is text",
+      "title": "Did You Know?",
+      "text": "The QWERTY keyboard was explicitly designed to slow typing",
       "user_id": 1,
       "created_at": "03/31/2024 19:30:00"
     },
     {
-      "title": "newer Post",
-      "text": "this is more text",
+      "title": "Origin of Bugs",
+      "text": "The term bug was created when a computer glitch originated from a moth causing a malfunction in a Harvard Mark II computer",
       "user_id": 2,
       "created_at": "03/31/2024 07:00:00" 
     }

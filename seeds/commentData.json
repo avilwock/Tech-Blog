@@ -1,12 +1,12 @@
 [
    {
-    "comment_text": "This is test text",
+    "comment_text": "No way. That's so interesting!",
     "created_at": "03/31/2024 07:00:00", 
     "user_id": 2,
     "post_id": 1
    },
    {
-    "comment_text": "this is more text",
+    "comment_text": "That's really cool",
     "created_at": "04/1/2024 07:00:00", 
     "user_id": 3,
     "post_id": 2

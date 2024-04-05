@@ -3,7 +3,7 @@
 {{#if posts.length}}
   <ul>
     {{#each posts}}
-      <li>
+    <div class="post-container">
         <div class="post-details">
           <h3>{{this.dataValues.title}}</h3>
           <p>{{this.dataValues.text}}</p>
@@ -14,12 +14,10 @@
         {{#if this.comments.length}}
           <ul>
             {{#each this.comments}}
-              <li>
                 <div class="comment-details">
                   <p>{{this.dataValues.comment_text}}</p>
                   <p>Comment by {{../user.dataValues.name}} on {{format_date this.dataValues.created_at}}</p>
                 </div>
-              </li>
             {{/each}}
           </ul>
         {{else}}
@@ -31,14 +29,14 @@
 
         <!-- Add button to edit post -->
         <a href="/dash/edit/{{this.dataValues.id}}" class="btn edit-post-btn">Edit Post</a>
-      </li>
+      </div>
     {{/each}}
   </ul>
 {{else}}
   <p>No posts available.</p>
 {{/if}}
 
-<button type="button" class="btn"><a class="text-light" href="/dash/new">Add New Post</a></button>
+<button type="button" class="btn" "add-new-post"><a class = "btn" href="/dash/new">Add New Post</a></button>
 
 {{!-- Include client-side JavaScript to handle comment submission --}}
 <script src="/js/comment.js"></script>

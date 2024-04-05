@@ -1,10 +1,7 @@
-<!-- homepage.hbs -->
-<h2>Posts</h2>
-
 {{#if posts.length}}
   <ul>
     {{#each posts}}
-      <li>
+      <div class="post-container"> <!-- Move post-container class inside each iteration -->
         <h3>{{this.dataValues.title}}</h3>
         <p>{{this.dataValues.text}}</p>
         <p>Posted by <span class="post-username">{{this.user.dataValues.name}}</span> on {{format_date this.dataValues.created_at}}</p>
@@ -13,30 +10,18 @@
         {{#if this.comments.length}}
           <ul>
             {{#each this.comments}}
-              <li>
-                <div class="comment-details">
-                  <p>{{this.dataValues.comment_text}}</p>
-                  <p>Comment by {{../user.dataValues.name}} on {{format_date this.dataValues.created_at}}</p>
-                </div>
-              </li>
+              <div class="comment-details">
+                <p>{{this.dataValues.comment_text}}</p>
+                <p>Comment by {{../user.dataValues.name}} on {{format_date this.dataValues.created_at}}</p>
+              </div>
             {{/each}}
           </ul>
         {{else}}
           <p>No comments available.</p>
-        {{/if}}        
-
-      </li>
+        {{/if}}
+      </div> <!-- Close post-container class inside each iteration -->
     {{/each}}
   </ul>
 {{else}}
   <p>No posts available.</p>
 {{/if}}
-
-{{#if loggedIn}}
-  <form action="/api/users/logout" method="POST">
-    <button type="submit" class="btn">Logout</button>
-  </form>
-{{/if}}
-  
-
-  

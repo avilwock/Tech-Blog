@@ -1,15 +1,15 @@
-<div>
-  {{#each this}}
-    <div class="card">
-        <h3 class="card-header"></h3>
-        <section class="comment card-body">
-            <div class="text">
-              <p>  {{comment_text}} </p>
-            </div>
-            <div class="meta">
-            <p>   -{{user.name}}, {{format_date created_at}} {{format_time created_at}} </p>
-            </div>
-        </section>
-    </div>
-  {{/each}}
-</div>
+{{#if comments.length}}
+  <h2>Comments:</h2>
+  <ul>
+    {{#each comments}}
+      <li>
+        <div class="comment-details">
+          <p>{{this.dataValues.comment_text}}</p>
+          <p>Comment by {{this.user.dataValues.name}} on {{format_date this.dataValues.created_at}}</p>
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+{{else}}
+  <p>No comments available.</p>
+{{/if}}
