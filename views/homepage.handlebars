@@ -12,12 +12,10 @@
         {{#if this.comments.length}}
           <ul>
             {{#each this.comments}}
-              <li>
                 <div class="comment-details">
                   <p>{{this.dataValues.comment_text}}</p>
                   <p>Comment by {{../user.dataValues.name}} on {{format_date this.dataValues.created_at}}</p>
                 </div>
-              </li>
             {{/each}}
           </ul>
         {{else}}
@@ -39,5 +37,3 @@
 {{else}}
   <p>No posts available.</p>
 {{/if}}
-
-<button type="button" class="btn add-new-post"><a class="btn" href="/dash/new">Add New Post</a></button>
