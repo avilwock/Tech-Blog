@@ -1,27 +1,43 @@
 {{#if posts.length}}
   <ul>
     {{#each posts}}
-      <div class="post-container"> <!-- Move post-container class inside each iteration -->
-        <h3>{{this.dataValues.title}}</h3>
-        <p>{{this.dataValues.text}}</p>
-        <p>Posted by <span class="post-username">{{this.user.dataValues.name}}</span> on {{format_date this.dataValues.created_at}}</p>
-      
+      <div class="post-container">
+        <div class="post-details">
+          <h3>{{this.dataValues.title}}</h3>
+          <p>{{this.dataValues.text}}</p>
+          <p>Posted by <span class="post-username">{{this.user.dataValues.name}}</span> on {{format_date this.dataValues.created_at}}</p>
+        </div>
+
         <h4>Comments:</h4>
         {{#if this.comments.length}}
           <ul>
             {{#each this.comments}}
-              <div class="comment-details">
-                <p>{{this.dataValues.comment_text}}</p>
-                <p>Comment by {{../user.dataValues.name}} on {{format_date this.dataValues.created_at}}</p>
-              </div>
+              <li>
+                <div class="comment-details">
+                  <p>{{this.dataValues.comment_text}}</p>
+                  <p>Comment by {{../user.dataValues.name}} on {{format_date this.dataValues.created_at}}</p>
+                </div>
+              </li>
             {{/each}}
           </ul>
         {{else}}
           <p>No comments available.</p>
         {{/if}}
-      </div> <!-- Close post-container class inside each iteration -->
+
+        <!-- Form for adding a new comment -->
+        <form class="add-comment-form" action="/api/comments" method="POST">
+          <div>
+            <label for="commentText">Add Comment:</label><br>
+            <textarea class="comment-text" name="comment_text" rows="4" cols="50"></textarea>
+            <input type="hidden" name="post_id" value="{{this.dataValues.id}}">
+          </div>
+          <button type="submit" class="add-comment-btn">Submit</button>
+        </form>
+      </div>
     {{/each}}
   </ul>
 {{else}}
   <p>No posts available.</p>
 {{/if}}
+
+<button type="button" class="btn add-new-post"><a class="btn" href="/dash/new">Add New Post</a></button>

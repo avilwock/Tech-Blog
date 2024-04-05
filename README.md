@@ -1,6 +1,17 @@
 # Tech-Blog
 
-## Your Task
+## Table of Contents ![License](https://img.shields.io/badge/license-MIT%20license-blue)
+
+- [User Story](#user-story)
+- [Acceptance Criteria](#acceptance-criteria)
+- [Future Implementations](#future-implementations)
+- [Access](#access)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
+- [License](#license)
+
+## Description
 
 Writing about tech can be just as important as making it. Developers spend plenty of time creating new applications and debugging existing codebases, but most developers also spend at least some of their time reading and writing about technical concepts, recent advancements, and new technologies. A simple Google search for any concept covered in this course returns thousands of think pieces and tutorials from developers of all skill levels!
 
@@ -51,3 +62,49 @@ THEN I am signed out of the site
 WHEN I am idle on the site for more than a set time
 THEN I am able to view posts and comments but I am prompted to log in again before I can add, update, or delete posts
 ```
+
+## Future Implementations
+
+* Allow comments to be commented on
+
+## Access
+
+To access this site, please visit: https://github.com/avilwock/E-Commerce-Platform
+
+## Installation
+
+To install this to your computer, clone the repositoryRun npm install in the terminal
+
+Open mysql and source the schema
+
+Seed the data by typing in node seeds/index.js
+
+## Usage
+
+To use on your local server, type in node server into the integrated terminal.
+
+Then open a browser and type in http://localhost:3001 to reach the homepage
+
+Click login and you can either log in, or create a new username password.
+
+Once logged in, you can view the dashboard with your posts and comments on it.
+
+To add a new post, click add new post
+
+To update a post click view post, and then you can make changes. You can also delete the post from here.
+
+If you would like to add a comment to someone else's post, you can do so on the homepage by typing a comment into the comment box and selecting submit
+
+## Credits
+
+With thanks to:
+
+Locan Garland, Coding Bootcamp, University of Irvine California
+
+## Questions
+
+For any questions please contact: avilwock@gmail.com
+
+## License
+
+MIT License

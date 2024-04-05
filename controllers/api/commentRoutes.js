@@ -83,4 +83,23 @@ router.delete('/:id', withAuth, (req, res) => {
     });
 });
 
+router.post('/add-comment', async (req, res) => {
+    try {
+        // Handle form submission here
+        // For example, save the submitted comment to the database
+        const newComment = await Comment.create({
+            // Assuming you have a 'comment_text' field in your Comment model
+            comment_text: req.body.comment_text,
+            // Assuming you have a 'post_id' field in your Comment model
+            post_id: req.body.post_id
+        });
+        // Send a response indicating success
+        res.status(201).send('Comment submitted successfully');
+    } catch (error) {
+        // Handle errors
+        console.error('Error submitting comment:', error);
+        res.status(500).send('Internal server error');
+    }
+});
+
 module.exports = router; // Exporting the router for use in other parts of the application
