@@ -11,7 +11,7 @@ function submitCommentForm(post_id) {
 
     // Perform an AJAX request or any custom form submission logic here
     // For example:
-    fetch('/api/comments/add-comment', { // Change the URL to the correct endpoint
+    fetch('/api/comments' + post_id, { // Change the URL to the correct endpoint
         method: 'POST',
         body: formData
     })

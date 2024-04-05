@@ -23,7 +23,7 @@
         {{/if}}
 
         <!-- Form for adding a new comment -->
-        <form class="add-comment-form" action="/api/comments" method="POST">
+        <form class="add-comment-form" action="/api/comments/{{this.dataValues.id}}" method="POST"> <!-- Include the post ID in the action URL -->
           <div>
             <label for="commentText">Add Comment:</label><br>
             <textarea class="comment-text" name="comment_text" rows="4" cols="50"></textarea>
