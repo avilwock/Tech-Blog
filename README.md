@@ -69,7 +69,9 @@ THEN I am able to view posts and comments but I am prompted to log in again befo
 
 ## Access
 
-To access this site, please visit: https://github.com/avilwock/E-Commerce-Platform
+To access this repository, please visit: https://github.com/avilwock/E-Commerce-Platform
+
+To access this site, please visit: https://warm-sands-36519-225dbeb270ac.herokuapp.com/ 
 
 ## Installation
 
@@ -94,6 +96,30 @@ To add a new post, click add new post
 To update a post click view post, and then you can make changes. You can also delete the post from here.
 
 If you would like to add a comment to someone else's post, you can do so on the homepage by typing a comment into the comment box and selecting submit
+
+Login
+
+![alt text](public/images/TechBlog4.jpeg)
+
+Sign Up
+
+![alt text](public/images/TechBlog5.jpeg)
+
+Home Page
+
+![alt text](public/images/TechBlog1.jpeg)
+
+Dashboard
+
+![alt text](public/images/TechBlog3.jpeg)
+
+Add Post
+
+![alt text](public/images/TechBlog2.jpeg)
+
+Edit Post
+
+![alt text](public/images/TechBlog6.jpeg)
 
 ## Credits
 
